@@ -1,0 +1,4 @@
+.env
+automax_database.json
+db.sqlite3
+

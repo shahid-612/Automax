@@ -1,0 +1,46 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    {% if edit %}
+        Edit Your Listing | AutoMax
+    {% else %}
+        List Your Car | AutoMax
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid text-center py-5">
+    <div class="container px-4 py-5" id="hanging-icons">
+        <div class="row g-4">
+            <div class="col d-flex align-items-start">
+                <div>
+                    <h2 class="mb-3 border-bottom" style="color: black">
+                        {% if edit %}
+                            Edit Your Listing
+                        {% else %}
+                            List Your Car
+                        {% endif %}
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <form action="{% if edit %} {% url 'edit' id=listing_object.id %} {% else %} {% url 'list' %} {% endif %}"
+            method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-6">
+                    {{ listing_form|crispy }}
+                </div>   
+                <div class="col-6">
+                    {{ location_form|crispy }}
+                </div> 
+            </div>
+            <button class="btn btn-lg btn-danger" type="submit">Save</button>
+        </form>
+
+    </div>
+</div>
+{% endblock %}
