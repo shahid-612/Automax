@@ -1,4 +1,6 @@
 .env
 automax_database.json
 db.sqlite3
-
+database.json
+cleaned_database.json
+scripts

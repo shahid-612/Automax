@@ -24,12 +24,12 @@ class Location(models.Model):
     
     
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, )
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     photo = CloudinaryField("image", null=True)    # 2 attr are passed to user_pic_dir
     # 1 is the instance (Profile instance) and second is filename which is being selected 
     bio = models.TextField(max_length=2000, blank=True)
     phone_number = models.CharField(max_length=13, blank=True)
-    location = models.OneToOneField(Location, on_delete=models.SET_NULL, null=True, 
+    location = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL, 
                                     related_name="user_location")
     
     def __str__(self):
